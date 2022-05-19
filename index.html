@@ -1,0 +1,98 @@
+<html>
+<head>
+	<style>
+@property --percentage {
+  initial-value: 0%;
+  inherits: false;
+  syntax: "<percentage>";
+}
+
+@property --remaining {
+  initial-value: 3600s;
+  inherits: false;
+  syntax: "<initial-value>";
+}
+
+#timer {
+  background: conic-gradient(rgba(255, 255, 255, 0.75) var(--percentage), rgba(0,0,0,0) 0);
+  animation: timer var(--remaining) infinite linear;
+}
+
+.segments {
+  position: relative;
+  width: 80vmin;
+  height: 80vmin;
+}
+
+.segment {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+}
+
+.one {
+  background: conic-gradient(blue 60deg, rgba(0,0,0,0) 0);
+}
+
+.two {
+  background: conic-gradient(green 120deg, rgba(0,0,0,0) 0);
+}
+.two {
+  background: conic-gradient(green 120deg, rgba(0,0,0,0) 0);
+}
+.three {
+  background: conic-gradient(orange 180deg, rgba(0,0,0,0) 0);
+}
+.four {
+  background: conic-gradient(purple 240deg, rgba(0,0,0,0) 0);
+}
+.five {
+  background: conic-gradient(pink 300deg, rgba(0,0,0,0) 0);
+}
+.six {
+  background: conic-gradient(crimson 360deg, rgba(0,0,0,0) 0);
+}
+
+@keyframes timer {
+  to {
+    --percentage: 100%;
+  }
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+	
+	</style>
+
+	<script type="text/javascript">
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const params = Object.fromEntries(urlSearchParams.entries());
+		const percent = `${params['percent']}%`;
+		const remaining = `${(100 - Number.parseInt(params['percent'] || 0)) * 36}s`; 
+		window.onload = function() {
+			const element = document.getElementById('timer');
+			element.style.setProperty("--percentage", percent);
+			element.style.setProperty("--remaining", remaining);
+		};
+	</script>
+</head>
+	<body>
+	
+		<div class="segments">
+			<div class="segment six"></div>
+			<div class="segment five"></div>
+			<div class="segment four"></div>
+			<div class="segment three"></div>
+			<div class="segment two"></div>
+			<div class="segment one"></div>
+			<div class="segment" id="timer"></div>
+		</div>
+
+	</body>
+</html>
